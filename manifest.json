@@ -1,0 +1,26 @@
+{
+	"name": "Name Dropper",
+	"version": "1.0.0",
+	"description": "Let users of Google Analytics know YOU went to their site, reverse privacy of sorts.",
+	"page_action": {
+		"default_icon": "nd.png",
+		"default_title": "Name Dropped"
+	},
+	"icons": {
+		"16": "icon16.png",
+		"32": "icon32.png",
+		"48": "icon48.png",
+		"128": "icon128.png"
+	},
+	"permissions": [
+			"tabs", "http://*/*", "https://*/*"
+	],
+	"background_page": "background.html",
+	"options_page": "options.html",
+	"content_scripts": [{
+		"matches": ["http://*/*","https://*/*"],
+		"js": ["inject.js"],
+		"run_at": "document_end",
+		"all_frames": true
+    }]
+}

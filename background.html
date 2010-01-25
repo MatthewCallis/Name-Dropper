@@ -1,0 +1,19 @@
+<html><head><script type="text/javascript">
+var tabinfo = {};
+// free memory
+chrome.tabs.onRemoved.addListener(function(tabId){ delete tabinfo[tabId]; });
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
+	if(request.msg == 'name-dropper'){
+		var name = localStorage.nameDropperName;
+		var site = localStorage.nameDropperSite;
+		sendResponse({name: name, site: site});
+		chrome.pageAction.setIcon({tabId: sender.tab.id, path: 'nd.png'});
+		chrome.pageAction.setTitle({tabId: sender.tab.id, title: 'Name Dropped'});
+		chrome.pageAction.show(sender.tab.id);
+	}
+	else if(request.msg == 'get'){
+		var info = tabinfo[request.tab];
+		sendResponse({info: info});
+	}
+});
+</script></head><body></body></html>

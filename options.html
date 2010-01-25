@@ -1,0 +1,28 @@
+<html><head><title>Name Dropper Options</title></head>
+<script type="text/javascript">
+function save_options(){
+	localStorage.nameDropperName = String(document.getElementById("name").value);
+	localStorage.nameDropperSite = String(document.getElementById("site").value);
+	// Update status to let user know options were saved.
+	var status = document.getElementById("status");
+	status.innerHTML = "Options Saved.";
+	setTimeout(function(){status.innerHTML = "";}, 750);
+}
+// Restores select box state to saved value from localStorage.
+function restore_options(){
+	var name = localStorage.nameDropperName;
+	var site = localStorage.nameDropperSite;
+	if(!name || !site){
+		return;
+	}
+	document.getElementById("name").value = name;
+	document.getElementById("site").value = site;
+}
+</script>
+<body onload="restore_options()">
+<em id="status"></em><br/>
+Your Name: <input type="text" id="name" value="Some Guy"/><br/>
+Website: <input type="text" id="site" value="http://spurrmarketing.com/"/><br/>
+<button onclick="save_options()">Save</button>
+</body>
+</html>
